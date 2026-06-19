@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HONEY STORE LUXURY • Relojes & Joyería</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #0A0A0A;
+      --near-black: #111111;
+      --card-bg: #141414;
+      --gold: #C9A84C;
+      --gold-light: #E8C97A;
+      --gold-dark: #9A7B30;
+      --cream: #F5EDD6;
+      --cream-muted: #D4C9A8;
+      --slate: #1C1C1E;
+      --text-muted: #6B6B6B;
+      --border: rgba(201,168,76,0.2);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--black);
+      color: var(--cream);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    #particles {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.4rem 3rem;
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { display: flex; flex-direction: column; line-height: 1; }
+    .nav-logo .brand { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; letter-spacing: 0.18em; color: var(--gold); }
+    .nav-logo .sub { font-size: 0.55rem; letter-spacing: 0.45em; color: var(--cream-muted); text-transform: uppercase; margin-top: 3px; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { color: var(--cream-muted); text-decoration: none; font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; transition: color 0.3s; }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-back {
+      font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--cream-muted); text-decoration: none;
+      border: 1px solid var(--border); padding: 0.5rem 1.2rem;
+      transition: all 0.3s;
+    }
+    .nav-back:hover { border-color: var(--gold); color: var(--gold); }
+
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      z-index: 1;
+    }
+    .hero-inner { padding: 0 1.5rem; }
+    .hero-eyebrow {
+      font-size: 0.6rem; letter-spacing: 0.6em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 2rem;
+      display: flex; align-items: center; justify-content: center; gap: 1rem;
+    }
+    .hero-eyebrow::before, .hero-eyebrow::after {
+      content: ''; display: block; width: 40px; height: 1px; background: var(--gold-dark);
+    }
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.5rem, 10vw, 9rem);
+      font-weight: 300;
+      line-height: 0.9;
+      letter-spacing: -0.01em;
+      margin-bottom: 1rem;
+    }
+    .hero h1 em { font-style: italic; color: var(--gold); }
+    .hero-tagline {
+      font-size: 0.7rem; letter-spacing: 0.4em; text-transform: uppercase;
+      color: var(--cream-muted); margin: 2rem 0 3.5rem;
+    }
+    .hero-cta {
+      display: inline-flex; align-items: center; gap: 1rem;
+      background: transparent; border: 1px solid var(--gold);
+      color: var(--gold); text-decoration: none;
+      font-size: 0.65rem; letter-spacing: 0.35em; text-transform: uppercase;
+      padding: 1rem 2.5rem;
+      transition: all 0.4s;
+      position: relative; overflow: hidden;
+    }
+    .hero-cta::before {
+      content: ''; position: absolute; inset: 0;
+      background: var(--gold); transform: scaleX(0); transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+    .hero-cta:hover::before { transform: scaleX(1); }
+    .hero-cta:hover { color: var(--black); }
+    .hero-cta span { position: relative; z-index: 1; }
+    .hero-scroll {
+      position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+      font-size: 0.55rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--text-muted);
+    }
+    .scroll-line {
+      width: 1px; height: 50px; background: linear-gradient(to bottom, var(--gold-dark), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse { 0%,100%{opacity:0.3} 50%{opacity:1} }
+
+    section { position: relative; z-index: 1; }
+    .section-header { text-align: center; padding: 5rem 2rem 3rem; }
+    .section-header .eyebrow {
+      font-size: 0.55rem; letter-spacing: 0.6em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1rem; display: block;
+    }
+    .section-header h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      font-weight: 300;
+    }
+    .section-header h2 em { font-style: italic; color: var(--gold); }
+    .gold-rule { width: 60px; height: 1px; background: var(--gold); margin: 1.5rem auto 0; }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5px;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 5rem;
+    }
+    .product-card {
+      background: var(--card-bg);
+      position: relative;
+      cursor: pointer;
+      overflow: hidden;
+      transition: transform 0.4s ease;
+    }
+    .product-card:hover { transform: translateY(-6px); }
+    .product-card::after {
+      content: ''; position: absolute; inset: 0;
+      border: 1px solid transparent;
+      transition: border-color 0.4s;
+      pointer-events: none;
+      z-index: 2;
+    }
+    .product-card:hover::after { border-color: var(--gold); }
+    .product-img-wrap {
+      aspect-ratio: 1;
+      overflow: hidden;
+      background: #0f0f0f;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .product-img-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+      filter: saturate(0.85);
+    }
+    .product-card:hover img { transform: scale(1.07); filter: saturate(1); }
+    .product-badge {
+      position: absolute; top: 1rem; left: 1rem; z-index: 3;
+      font-size: 0.5rem; letter-spacing: 0.3em; text-transform: uppercase;
+      background: var(--gold); color: var(--black);
+      padding: 0.3rem 0.7rem; font-weight: 500;
+    }
+    .product-badge.new { background: var(--near-black); color: var(--gold); border: 1px solid var(--gold); }
+    .product-info { padding: 1.4rem 1.4rem 1.8rem; }
+    .product-brand { font-size: 0.55rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.3rem; }
+    .product-name { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 400; line-height: 1.2; margin-bottom: 0.5rem; }
+    .product-desc { font-size: 0.7rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 1.2rem; }
+    .product-footer { display: flex; align-items: center; justify-content: space-between; }
+    .product-price { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 300; color: var(--gold-light); }
+    .product-price small { font-size: 0.6rem; letter-spacing: 0.15em; color: var(--text-muted); display: block; }
+    .btn-wa {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--gold); text-decoration: none;
+      border: 1px solid var(--gold-dark); padding: 0.55rem 1rem;
+      transition: all 0.3s;
+    }
+    .btn-wa:hover { background: var(--gold); color: var(--black); }
+
+    .gold-divider {
+      max-width: 1400px; margin: 0 auto; padding: 0 2rem;
+      display: flex; align-items: center; gap: 1.5rem;
+      color: var(--gold-dark); font-size: 0.55rem; letter-spacing: 0.5em; text-transform: uppercase;
+    }
+    .gold-divider::before, .gold-divider::after {
+      content: ''; flex: 1; height: 1px; background: var(--border);
+    }
+
+    .features {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border: 1px solid var(--border);
+      margin-bottom: 6rem;
+    }
+    .feature { padding: 3rem 2.5rem; border-right: 1px solid var(--border); text-align: center; }
+    .feature:last-child { border-right: none; }
+    .feature-icon { font-size: 1.8rem; margin-bottom: 1.2rem; }
+    .feature h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 400; margin-bottom: 0.6rem; letter-spacing: 0.05em; }
+    .feature p { font-size: 0.7rem; color: var(--text-muted); line-height: 1.7; }
+
+    .luxury-banner {
+      background: linear-gradient(135deg, #0f0f0f 0%, #1a1408 50%, #0f0f0f 100%);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 4rem 2rem;
+      text-align: center;
+      margin-bottom: 6rem;
+    }
+    .luxury-banner p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.2rem, 3vw, 2.2rem);
+      font-weight: 300; font-style: italic;
+      color: var(--cream-muted); line-height: 1.5;
+      max-width: 700px; margin: 0 auto 2rem;
+    }
+    .luxury-banner p em { color: var(--gold); font-style: normal; }
+
+    footer {
+      background: var(--near-black);
+      border-top: 1px solid var(--border);
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+    .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 300; color: var(--gold); letter-spacing: 0.2em; margin-bottom: 0.3rem; }
+    .footer-sub { font-size: 0.55rem; letter-spacing: 0.45em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1.5rem; }
+    footer p { font-size: 0.65rem; color: var(--text-muted); }
+    footer a { color: var(--gold-dark); text-decoration: none; }
+    footer a:hover { color: var(--gold); }
+
+    .modal-overlay {
+      display: none; position: fixed; inset: 0; z-index: 200;
+      background: rgba(0,0,0,0.85); backdrop-filter: blur(8px);
+      align-items: center; justify-content: center; padding: 1rem;
+    }
+    .modal-overlay.active { display: flex; }
+    .modal {
+      background: var(--card-bg); border: 1px solid var(--border);
+      max-width: 560px; width: 100%; padding: 2.5rem;
+      position: relative; animation: modalIn 0.3s ease;
+    }
+    @keyframes modalIn { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:none} }
+    .modal-close {
+      position: absolute; top: 1rem; right: 1rem;
+      background: none; border: none; color: var(--text-muted);
+      font-size: 1.2rem; cursor: pointer; transition: color 0.3s;
+    }
+    .modal-close:hover { color: var(--gold); }
+    .modal h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 300; margin-bottom: 0.4rem; }
+    .modal .brand { font-size: 0.55rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; display: block; }
+    .modal p { font-size: 0.75rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 1.5rem; }
+    .modal-price { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--gold-light); margin-bottom: 1.5rem; }
+    .modal-price small { font-size: 0.65rem; letter-spacing: 0.2em; color: var(--text-muted); display: block; }
+    .btn-modal-wa {
+      display: block; width: 100%; text-align: center; text-decoration: none;
+      background: var(--gold); color: var(--black);
+      font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase;
+      padding: 1rem; font-weight: 500; transition: background 0.3s;
+    }
+    .btn-modal-wa:hover { background: var(--gold-light); }
+
+    @media(max-width: 768px) {
+      nav { padding: 1rem 1.2rem; }
+      .nav-links { display: none; }
+      .features { grid-template-columns: 1fr; }
+      .feature { border-right: none; border-bottom: 1px solid var(--border); }
+      .feature:last-child { border-bottom: none; }
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <span class="brand">HONEY LUXURY</span>
+    <span class="sub">Relojes &amp; Joyería · Ensenada</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#relojes">Relojes</a></li>
+    <li><a href="#joyeria">Joyería</a></li>
+    <li><a href="#nosotros">Contacto</a></li>
+  </ul>
+  <a href="https://honey-shopmx.github.io/honey-shop-mx/" class="nav-back">← Honey Shop</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <p class="hero-eyebrow">Colección Exclusiva 2026</p>
+    <h1>HONEY<br><em>LUXURY</em></h1>
+    <p class="hero-tagline">Relojes · Joyería · Edición Limitada · Ensenada B.C.</p>
+    <a href="#relojes" class="hero-cta"><span>Explorar Colección</span></a>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    Scroll
+  </div>
+</div>
+
+<!-- FEATURES -->
+<div style="max-width:1100px;margin:0 auto 2rem;padding:0 1.5rem">
+  <div class="features">
+    <div class="feature">
+      <div class="feature-icon">◈</div>
+      <h3>Alta Precisión</h3>
+      <p>Cada pieza inspeccionada individualmente. Mecanismo verificado antes de entrega.</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">◇</div>
+      <h3>Discreción Total</h3>
+      <p>Empaque premium discreto. Envíos seguros a todo México con número de rastreo.</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">◆</div>
+      <h3>Garantía 6 Meses</h3>
+      <p>Respaldamos cada pieza. Cambio o devolución sin preguntas en 15 días.</p>
+    </div>
+  </div>
+</div>
+
+<!-- RELOJES -->
+<section id="relojes">
+  <div class="section-header">
+    <span class="eyebrow">Colección Premier</span>
+    <h2>Relojes de <em>Distinción</em></h2>
+    <div class="gold-rule"></div>
+  </div>
+
+  <div class="products-grid">
+
+    <!-- Cartier Santos -->
+    <div class="product-card" onclick="openModal('cartier-santos')">
+      <div class="product-badge">Sobre pedido</div>
+      <div class="product-img-wrap">
+        <img src="https://www.pj-watch.com/wp-content/uploads/2024/08/Cartier-Santos-De-Cartier-Large-Automatic-Mens-Watch-Ref.WSSA0018.jpg" alt="Cartier Santos">
+      </div>
+      <div class="product-info">
+        <p class="product-brand">Cartier</p>
+        <h3 class="product-name">Cartier Santos<br>
+        <p class="product-desc">Cuadrante blanco · Correa de acero entrelazada · 39.8mm</p>
+        <div class="product-footer">
+          <div class="product-price"><small>precio</small>$4,500</div>
+          <a href="https://wa.me/526461481411?text=Hola,%20me%20interesa%20el%20Cartier%20Santos%20Steel%20%26%20Gold" class="btn-wa" onclick="event.stopPropagation()">Preguntar</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rolex Submariner -->
+    <div class="product-card" onclick="openModal('rolex-sub')">
+      <div class="product-badge new">Nuevo</div>
+      <div class="product-img-wrap">
+        <img src="https://a.1stdibscdn.com/rolex-submariner-date-black-pvd-dlc-coated-stainless-steel-watch-116610ln-for-sale-picture-5/j_31272/j_182278821674320394407/DR125E_master.jpg" alt="Rolex Submariner">
+      </div>
+      <div class="product-info">
+        <p class="product-brand">Rolex</p>
+        <h3 class="product-name">Submariner<br>Date Black</h3>
+        <p class="product-desc">Caja Oystersteel · Bisel negro · Esfera negra lacada · Brazalete Oyster · 41mm</p>
+        <div class="product-footer">
+          <div class="product-price"><small>precio</small>$5,800</div>
+          <a href="https://wa.me/526461481411?text=Hola,%20me%20interesa%20el%20Rolex%20Submariner%20Date%20Black" class="btn-wa" onclick="event.stopPropagation()">Preguntar</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Richard Mille RM66 -->
+    <div class="product-card" onclick="openModal('rm66')">
+      <div class="product-img-wrap">
+        <img src="https://xcimg.szwego.com/img/70c7906e/20240406/i1712334413_7682_4.jpg" alt="Richard Mille RM66">
+      </div>
+      <div class="product-info">
+        <p class="product-brand">Richard Mille</p>
+        <h3 class="product-name">RM 66<br>Flying Tourbillon</h3>
+        <p class="product-desc">Caja titanio grado 5 · Tourbillon volador · Esfera esqueleto · Correa cuero · 50mm</p>
+        <div class="product-footer">
+          <div class="product-price"><small>precio</small>$6,200</div>
+          <a href="https://wa.me/526461481411?text=Hola,%20me%20interesa%20el%20Richard%20Mille%20RM66" class="btn-wa" onclick="event.stopPropagation()">Preguntar</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- AP Audemars Piguet -->
+    <div class="product-card" onclick="openModal('patek')">
+      <div class="product-badge">Exclusivo</div>
+      <div class="product-img-wrap">
+        <img src="https://xcimg.szwego.com/img/6b9d1809/20240908/i1725779115_1648_4.jpg" alt="Patek Philippe">
+      </div>
+      <div class="product-info">
+        <p class="product-brand">Audemars Piguet </p>
+        <h3 class="product-name">Piguet<br>AP Audemars Royal</h3>
+        <p class="product-desc">Esfera de oro gradiente · Acero inoxidable · Índices aplicados dorados · 40mm</p>
+        <div class="product-footer">
+          <div class="product-price"><small>precio</small>$7,500</div>
+          <a href="https://wa.me/526461481411?text=Hola,%20me%20interesa%20el%20Patek%20Philippe%20Nautilus%205711" class="btn-wa" onclick="event.stopPropagation()">Preguntar</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Patek Philippe Nautilus 5711/1A -->
+    <div class="product-card" onclick="openModal('rm')">
+      <div class="product-badge new">Nuevo</div>
+      <div class="product-img-wrap">
+        <img src="https://xcimg.szwego.com/20201229/i1609221128_3009_0.jpg" alt="Richard Mille RM011">
+      </div>
+      <div class="product-info">
+        <p class="product-brand">Patek Philippe</p>
+        <h3 class="product-name">Patek Philippe<br>Nautilus 5711/1A</h3>
+        <p class="product-desc">Esfera azul degradada con rayas horizontales.
+
+Acero inoxidable, índices dorados aplicados.
+
+Brazalete integrado con cierre de seguridad.
+
+40 mm, calibre 26‑330 S.</p>
+        <div class="product-footer">
+          <div class="product-price"><small>precio</small>$8,900</div>
+          <a href="https://wa.me/526461481411?text=Hola,%20me%20interesa%20el%20Richard%20Mille%20RM%20011" class="btn-wa" onclick="event.stopPropagation()">Preguntar</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cartier Tank -->
+    <div class="product-card" onclick="openModal('tank')">
+      <div class="product-img-wrap">
+        <img src="https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=600&q=80" alt="Cartier Tank">
+      </div>
+      <div class="product-info">
+        <p class="product-brand">Cartier</p>
+        <h3 class="product-name">Tank Must<br>Or Jaune Large</h3>
+        <p class="product-desc">Baño oro amarillo 18k · Cuadrante azul · Correa cuero azul · Cierre dorado</p>
+        <div class="product-footer">
+          <div class="product-price"><small>precio</small>$3,800</div>
+          <a href="https://wa.me/526461481411?text=Hola,%20me%20interesa%20el%20Cartier%20Tank%20Must%20Or%20Jaune" class="btn-wa" onclick="event.stopPropagation()">Preguntar</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- BANNER -->
+<div class="luxury-banner">
+  <p>"El tiempo no espera.<br>Usa algo que lo <em>detenga</em>."</p>
+  <a href="https://wa.me/526461481411?text=Hola,%20quiero%20info%20sobre%20Honey%20Store%20Luxury" class="hero-cta" style="margin-top:0"><span>Consultar por WhatsApp</span></a>
+</div>
+
+<!-- JOYERÍA -->
+<section id="joyeria">
+  <div class="gold-divider">Joyería de Lujo</div>
+
+  <div class="section-header">
+    <span class="eyebrow">Alta Joyería</span>
+    <h2>Joyas para <em>Recordar</em></h2>
+    <div class="gold-rule"></div>
+  </div>
+
+  <div class="products-grid">
+
+    <!-- Collar Cartier Love -->
+    <div class="product-card" onclick="openModal('love-necklace')">
+      <div class="product-badge">Más Vendido</div>
+      <div class="product-img-wrap">
+        <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600&q=80" alt="Collar Love Cartier">
+      </div>
+      <div class="product-info">
+        <p class="product-brand">Cartier</p>
+        <h3 class="product-name">Collar Love<br>Oro Rosado</h3>
+        <p class="product-desc">Baño oro rosa 18k · Diseño tornillo icónico · Cadena 42cm · Cierre de langosta</p>
+        <div class="product-footer">
+          <div class="product-price"><small>precio</small>$1,200</div>
+          <a href="https://wa.me/526461481411?text=Hola,%20me%20interesa%20el%20Collar%20Love%20Cartier%20Oro%20Rosado" class="btn-wa" onclick="event.stopPropagation()">Preguntar</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pulsera VCA -->
+    <div class="product-card" onclick="openModal('vca')">
+      <div class="product-badge new">Nuevo</div>
+      <div class="product-img-wrap">
+        <img src="https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=600&q=80" alt="Van Cleef Arpels">
+      </div>
+      <div class="product-info">
+        <p class="product-brand">Van Cleef &amp; Arpels</p>
+        <h3 class="product-name">Pulsera Alhambra<br>Trébol Dorado</h3>
+        <p class="product-desc">20 motivos trébol · Baño oro amarillo 18k · Nácar blanco · Cadena de bolas</p>
+        <div class="product-footer">
+          <div class="product-price"><small>precio</small>$1,800</div>
+          <a href="https://wa.me/526461481411?text=Hola,%20me%20interesa%20la%20Pulsera%20Alhambra%20Van%20Cleef" class="btn-wa" onclick="event.stopPropagation()">Preguntar</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Anillo Bvlgari -->
+    <div class="product-card" onclick="openModal('bvlgari')">
+      <div class="product-img-wrap">
+        <img src="https://images.unsplash.com/photo-1603561591411-07134e71a2a9?w=600&q=80" alt="Bvlgari B.Zero1">
+      </div>
+      <div class="product-info">
+        <p class="product-brand">Bvlgari</p>
+        <h3 class="product-name">Anillo B.Zero1<br>Rose Gold</h3>
+        <p class="product-desc">Acero inoxidable con logo · Baño oro rosa 18k · 4 bandas · Talla ajustable</p>
+        <div class="product-footer">
+          <div class="product-price"><small>precio</small>$950</div>
+          <a href="https://wa.me/526461481411?text=Hola,%20me%20interesa%20el%20Anillo%20B.Zero1%20Bvlgari" class="btn-wa" onclick="event.stopPropagation()">Preguntar</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Aretes Chanel -->
+    <div class="product-card" onclick="openModal('chanel')">
+      <div class="product-badge">Clásico</div>
+      <div class="product-img-wrap">
+        <img src="https://images.unsplash.com/photo-1630019852942-f89202989a59?w=600&q=80" alt="Aretes Chanel">
+      </div>
+      <div class="product-info">
+        <p class="product-brand">Chanel</p>
+        <h3 class="product-name">Aretes CC Logo<br>Doble C Perla</h3>
+        <p class="product-desc">Metal dorado · Logo CC icónico · Perla sintética · Para orejas perforadas</p>
+        <div class="product-footer">
+          <div class="product-price"><small>precio</small>$650</div>
+          <a href="https://wa.me/526461481411?text=Hola,%20me%20interesan%20los%20Aretes%20CC%20Logo%20Chanel" class="btn-wa" onclick="event.stopPropagation()">Preguntar</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pulsera Hermes -->
+    <div class="product-card" onclick="openModal('hermes')">
+      <div class="product-badge new">Nuevo</div>
+      <div class="product-img-wrap">
+        <img src="https://images.unsplash.com/photo-1573408301185-9519f94815b7?w=600&q=80" alt="Hermes Clic Clac">
+      </div>
+      <div class="product-info">
+        <p class="product-brand">Hermès</p>
+        <h3 class="product-name">Pulsera Clic Clac<br>Esmalte Naranja</h3>
+        <p class="product-desc">Acero inoxidable · Esmalte naranja signature · Cierre clic · Ancho H 16mm</p>
+        <div class="product-footer">
+          <div class="product-price"><small>precio</small>$1,100</div>
+          <a href="https://wa.me/526461481411?text=Hola,%20me%20interesa%20la%20Pulsera%20Clic%20Clac%20Hermes" class="btn-wa" onclick="event.stopPropagation()">Preguntar</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Collar Tiffany -->
+    <div class="product-card" onclick="openModal('tiffany')">
+      <div class="product-img-wrap">
+        <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=600&q=80" alt="Tiffany &amp; Co">
+      </div>
+      <div class="product-info">
+        <p class="product-brand">Tiffany &amp; Co.</p>
+        <h3 class="product-name">Collar Return to Tiffany<br>Silver &amp; Gold</h3>
+        <p class="product-desc">Plata 925 con baño rodio · Colgante con grabado · Cadena 41cm · Caja azul incluida</p>
+        <div class="product-footer">
+          <div class="product-price"><small>precio</small>$780</div>
+          <a href="https://wa.me/526461481411?text=Hola,%20me%20interesa%20el%20Collar%20Return%20to%20Tiffany" class="btn-wa" onclick="event.stopPropagation()">Preguntar</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="nosotros">
+  <div class="footer-logo">HONEY LUXURY</div>
+  <div class="footer-sub">Relojes &amp; Joyería · Ensenada, B.C. · México</div>
+  <p>Envíos a todo México &nbsp;·&nbsp; Pago por transferencia / efectivo<br>
+  <a href="https://wa.me/526461481411">WhatsApp: 646 148 1411</a> &nbsp;·&nbsp;
+  <a href="https://honey-shopmx.github.io/honey-shop-mx/">← Volver a Honey Shop Urban</a></p>
+  <p style="margin-top:1.5rem;font-size:0.55rem;color:#333">© 2026 Honey Store Luxury · Ensenada B.C. · Todas las marcas mencionadas son propiedad de sus respectivos dueños.</p>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <span class="brand" id="m-brand"></span>
+    <h3 id="m-name"></h3>
+    <p id="m-desc"></p>
+    <div class="modal-price"><small>precio estimado</small><span id="m-price"></span></div>
+    <a class="btn-modal-wa" id="m-wa" href="#">Preguntar por WhatsApp</a>
+  </div>
+</div>
+
+<script>
+/* ── PARTÍCULAS DORADAS ── */
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+let W, H, particles = [];
+
+function resize() {
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+class Particle {
+  constructor() { this.reset(); }
+  reset() {
+    this.x = Math.random() * W;
+    this.y = Math.random() * H + H;
+    this.size = Math.random() * 1.5 + 0.3;
+    this.speedY = -(Math.random() * 0.4 + 0.1);
+    this.speedX = (Math.random() - 0.5) * 0.2;
+    this.opacity = Math.random() * 0.4 + 0.05;
+    this.life = 0;
+    this.maxLife = Math.random() * 300 + 200;
+  }
+  update() {
+    this.x += this.speedX; this.y += this.speedY; this.life++;
+    if (this.life > this.maxLife || this.y < -10) this.reset();
+  }
+  draw() {
+    ctx.save();
+    ctx.globalAlpha = this.opacity * Math.sin((this.life / this.maxLife) * Math.PI);
+    ctx.fillStyle = '#C9A84C';
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+  }
+}
+
+for (let i = 0; i < 80; i++) {
+  const p = new Particle(); p.y = Math.random() * H; particles.push(p);
+}
+
+function animate() {
+  ctx.clearRect(0, 0, W, H);
+  particles.forEach(p => { p.update(); p.draw(); });
+  requestAnimationFrame(animate);
+}
+animate();
+
+/* ── MODAL DATA ── */
+const products = {
+  'cartier-santos': { brand:'Cartier', name:'Santos de Cartier — Steel & Gold', desc:'Cuadrante blanco con índices romanos dorados. Bisel cuadrado de oro amarillo. Brazalete de acero entrelazado intercambiable. Movimiento automático. Diámetro 39.8mm. Resistencia al agua 100m.', price:'$4,500', wa:'Hola,%20me%20interesa%20el%20Cartier%20Santos%20Steel%20%26%20Gold' },
+  'rolex-sub': { brand:'Rolex', name:'Submariner Date — Black Ceramic', desc:'Caja Oystersteel pulida y satinada. Bisel Cerachrom negro unidireccional. Esfera negra lacada con índices luminiscentes. Brazalete Oyster con cierre Oysterlock. 41mm. Certificado COSC.', price:'$5,800', wa:'Hola,%20me%20interesa%20el%20Rolex%20Submariner%20Date%20Black' },
+  'rm66': { brand:'Richard Mille', name:'RM 66 — Flying Tourbillon', desc:'Caja titanio grado 5 mecanizado CNC. Tourbillon volador de alta complicación. Esfera esqueleto con acabados en oro. Correa cuero de cocodrilo. 50mm. Movimiento manual con reserva 70 horas.', price:'$6,200', wa:'Hola,%20me%20interesa%20el%20Richard%20Mille%20RM66' },
+  'patek': { brand:'Patek Philippe', name:'Nautilus 5711 — Blue Gradient Dial', desc:'Esfera azul degradada icónica con rayas horizontales en relieve. Acero inoxidable. Índices aplicados dorados. Brazalete integrado con cierre de seguridad. 40mm. Calibre 26-330 S.', price:'$7,500', wa:'Hola,%20me%20interesa%20el%20Patek%20Philippe%20Nautilus%205711' },
+  'rm': { brand:'Richard Mille', name:'RM 011 — Felipe Massa Carbon', desc:'Caja NTPT Carbon de múltiples capas. Tourbillon flyback chrono. Esfera skeleton. Correa goma roja con cierre de titanio. 50x42.7mm. Resistencia 100m. Edición Felipe Massa.', price:'$8,900', wa:'Hola,%20me%20interesa%20el%20Richard%20Mille%20RM%20011' },
+  'tank': { brand:'Cartier', name:'Tank Must — Or Jaune Large', desc:'Caja rectangular bañada en oro amarillo 18k. Cuadrante azul con corona zafiro. Correa cuero azul de piel de ternera. Cierre dorado ardillon. Movimiento de cuarzo suizo.', price:'$3,800', wa:'Hola,%20me%20interesa%20el%20Cartier%20Tank%20Must%20Or%20Jaune' },
+  'love-necklace': { brand:'Cartier', name:'Collar Love — Oro Rosa', desc:'Motivo tornillo icónico de la colección Love. Baño oro rosa 18k. Cadena de eslabones 42cm ajustable. Cierre de langosta. Viene en estuche Cartier rojo. El símbolo del amor atemporal.', price:'$1,200', wa:'Hola,%20me%20interesa%20el%20Collar%20Love%20Cartier%20Oro%20Rosado' },
+  'vca': { brand:'Van Cleef & Arpels', name:'Pulsera Vintage Alhambra — 20 Motivos', desc:'Veinte motivos trébol de nácar blanco enmarcados en oro amarillo 18k. Cadena de bolas doradas. Cierre de langosta. Longitud 19cm. El símbolo de la fortuna y la elegancia parisina.', price:'$1,800', wa:'Hola,%20me%20interesa%20la%20Pulsera%20Alhambra%20Van%20Cleef' },
+  'bvlgari': { brand:'Bvlgari', name:'Anillo B.Zero1 — Rose Gold Edition', desc:'Cuatro bandas de acero inoxidable con logo Bvlgari grabado. Baño oro rosa 18k en los bordes. Diseño inspirado en el Coliseo Romano. Talla disponible 50–60. Caja Bvlgari incluida.', price:'$950', wa:'Hola,%20me%20interesa%20el%20Anillo%20B.Zero1%20Bvlgari' },
+  'chanel': { brand:'Chanel', name:'Aretes CC — Logo Perla Doble', desc:'Metal dorado con logo CC entrelazado en relieve. Colgante perla sintética blanca. Cierre de palomita para orejas perforadas. 3cm de largo. Clásico intemporal de la maison.', price:'$650', wa:'Hola,%20me%20interesan%20los%20Aretes%20CC%20Logo%20Chanel' },
+  'hermes': { brand:'Hermès', name:'Pulsera Clic Clac H — Esmalte Naranja', desc:'Acero inoxidable platinado con inserto de esmalte naranja "signature" Hermès. Cierre clic magnético. Ancho 16mm. Interior grabado con H. Icono de la maison desde 1970.', price:'$1,100', wa:'Hola,%20me%20interesa%20la%20Pulsera%20Clic%20Clac%20Hermes' },
+  'tiffany': { brand:'Tiffany & Co.', name:'Collar Return to Tiffany — Silver', desc:'Colgante ovalado en plata 925 con baño de rodio. Grabado "Return to Tiffany" en relieve. Cadena de 41cm con cierre de langosta. Presentado en la icónica caja azul Tiffany.', price:'$780', wa:'Hola,%20me%20interesa%20el%20Collar%20Return%20to%20Tiffany' },
+};
+
+function openModal(id) {
+  const p = products[id]; if(!p) return;
+  document.getElementById('m-brand').textContent = p.brand;
+  document.getElementById('m-name').textContent = p.name;
+  document.getElementById('m-desc').textContent = p.desc;
+  document.getElementById('m-price').textContent = p.price;
+  document.getElementById('m-wa').href = 'https://wa.me/526461481411?text=' + p.wa;
+  document.getElementById('modal').classList.add('active');
+}
+function closeModal() { document.getElementById('modal').classList.remove('active'); }
+document.getElementById('modal').addEventListener('click', function(e) { if(e.target === this) closeModal(); });
+document.addEventListener('keydown', function(e) { if(e.key==='Escape') closeModal(); });
+</script>
+</body>
+</html>
